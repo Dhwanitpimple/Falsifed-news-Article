@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Falsified News Article Detection</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700,800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <h1 style="font-size: 32px; font-weight: bold;">Falsified News Article Detection</h1>
+  <div class="cont">
+  <form method="POST" action="{{url_for('login')}}">
+    <div class="form sign-in">
+      <h2>Login</h2>
+      
+      <label>
+        <span>Username</span>
+        <input type="username" name="uname">
+      </label>
+      <label>
+        <span>Password</span>
+        <input type="password" name="passw">
+      </label>
+      <button class="submit" type="submit">Sign In</button>      
+    </form>
+    </div>
+
+    <div class="sub-cont">
+      <div class="img">
+        <div class="img-text m-up">
+          <h2>Not yet registered?</h2>
+          <p>Register...</p>
+        </div>
+        <div class="img-text m-in">
+          <h2>Already registered?</h2>
+          <p>Get rid of the hassle and login</p>
+        </div>
+        <div class="img-btn">
+          <span class="m-up">></span>
+          <span class="m-in"><</span>
+        </div>
+      </div>
+      <form method="POST" action="{{url_for('register')}}" id="uuu">
+      <div class="form sign-up">
+        <h2>Register</h2>
+        <label>
+            <span>Username</span>
+            <input type="username" name="uname">
+          </label>
+        <label>
+            <span>Email</span>
+            <input type="email" name="mail">
+          </label>
+          <label>
+            <span>Password</span>
+            <input type="password" name="passw">
+          </label>
+          <label>
+            
+          </label>
+          <button type="submit" class="submit">Register Now</button>
+        </form>
+      </div>
+    </div>
+  
+<script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Falsified News Article Detection</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700,800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <h1 style="font-size: 32px; font-weight: bold;">Falsified News Article Detection</h1>
+  <div class="cont">
+  <form method="POST" action="{{url_for('getURL')}}">
+    <div class="form sign-in">
+      <h2>Enter URL</h2>
+      <label>
+        <span>URL</span>
+        <input type="URL" name="url" id="ur" value="{{request.form.url}}">
+      </label>
+      <label>
+        <span>Date posted</span>
+        <input type="Date" name="date" id="dt">
+      </label>
+      <button class="submit" type="submit" onclick="W();">Submit</button>
+      
+      {% if e %} 
+      <label id="urt" class="bh" style="text-align: left;
+      background:#fffa;display: block; width: 460px; margin: 9px auto 0;"><strong>URL:</strong> {{f}} </label>
+      <label id="urt" class="bh" style="text-align: left;
+      background:#fffa;display: block; width: 460px; margin: 9px auto 0;"><strong>Headline:</strong> {{e}}</label>
+      <label id="dtt" class="bh" style="text-align: left;
+      background:#fffa;display: block; width: 460px; margin: 9px auto 0;"><strong>Date:</strong>{% if g==0 %} Date missing, please enter date{% endif %}{% if g!=0 %} {{g}} {% else %}<input type="Date" name="date" id="dt" style="width:50%;">{% endif %}</label>
+      <label id="srt" class="bh" style="text-align: left;
+      background:#fffa;display: block; width: 460px; margin: 9px auto 0;"><strong>Source:</strong>{% if (h=="[]")or(h=="") %} Source missing {% endif %}{% if (h!="[]")and(h!="") %} {{h}} {% else %} <input type="text" placeholder="Please input source name"> {% endif %}</label>
+      {% if e!="This isn't a valid URL, try entering article info manually" %}
+      {% endif %}
+     {% endif %}
+    
+    </form>
+    <a class= "btn btn-info" href="{{url_for('ops')}}">Go back</a>
+    {% if e %}
+    <form method="POST" action="{{url_for('Res')}}"><button class="submit" type="button" id="sup">Check</button></form>  
+    {% endif %}
+    </div>
+
+    <div class="sub-cont">
+      <div class="img">
+        <div class="img-text m-up">
+          <h2>No URL?</h2>
+          <p>Enter the article info manually...</p>
+        </div>
+        <div class="img-text m-in">
+          <h2>Have the URL?</h2>
+          <p>Get rid of the hassle and enter the URL</p>
+        </div>
+        <div class="img-btn">
+          <span class="m-up">></span>
+          <span class="m-in"><</span>
+        </div>
+      </div>
+      <form method="POST" action="{{url_for('getT')}}" id="uuu">
+      <div class="form sign-up">
+        <h2>Enter info manually</h2>
+        <label>
+          <span>Headline</span>
+          <input type="text" name="Titl" id="hl">
+        </label>
+        <label>
+          <span>Article body</span>
+          <textarea rows="4" cols="50" name="bodyn" id="bd" form="uuu"> </textarea>
+        </label>
+        <label>
+          <span>Source</span>
+          <input type="text" name="sr" id="sr">
+        </label>
+        <label>
+          <span>Date Posted</span>
+          <input type="Date" name="drt">
+        </label>
+
+        <button type="submit" class="submit" id="dt2" onclick="W();">Submit</button>
+        
+        </form>
+      </div>
+    </div>
+  </div>
+  {% if e %} 
+  <div class="res" style="text-align: center; overflow: scroll;">
+    <label><strong style="font-size: 40px;">Result</strong></label>
+    <label>Related Headlines & stances: <a href="{{arli[0]}}" target="_blank"><p style="width:800px; text-align: center; margin-left: -100%; margin-right: 0px;">{{l[0]}}</a> - {{arso[0]}} - <strong>{{oo[0]}} - {{j[0]}}</strong></p>
+      <a href="{{arli[1]}}" target="_blank"><p style="width:800px; text-align: center; margin-left: -100%; margin-right: 0px;">{{l[1]}}</a> - {{arso[1]}} - <strong>{{oo[1]}} - {{j[1]}}</strong></p>
+      <a href="{{arli[2]}}" target="_blank"><p style="width:800px; text-align: center; margin-left: -100%; margin-right: 0px;">{{l[2]}}</a> - {{arso[2]}} - <strong>{{oo[2]}} - {{j[2]}}</strong></p>
+      <a href="{{arli[3]}}" target="_blank"><p style="width:800px; text-align: center; margin-left: -100%; margin-right: 0px;">{{l[3]}}</a> - {{arso[3]}} - <strong>{{oo[3]}} - {{j[3]}}</strong></p>
+      <a href="{{arli[4]}}" target="_blank"><p style="width:800px; text-align: center; margin-left: -100%; margin-right: 0px;">{{l[4]}}</a> - {{arso[4]}} - <strong>{{oo[4]}} - {{j[4]}}</strong></p>
+      <a href="{{arli[5]}}" target="_blank"><p style="width:800px; text-align: center; margin-left: -100%; margin-right: 0px;">{{l[5]}}</a> - {{arso[5]}} - <strong>{{oo[5]}} - {{j[5]}}</strong></p>
+      <a href="{{arli[6]}}" target="_blank"><p style="width:800px; text-align: center; margin-left: -100%; margin-right: 0px;">{{l[6]}}</a> - {{arso[6]}} - <strong>{{oo[6]}} - {{j[6]}}</strong></p>
+      <a href="{{arli[7]}}" target="_blank"><p style="width:800px; text-align: center; margin-left: -100%; margin-right: 0px;">{{l[7]}}</a> - {{arso[7]}} - <strong>{{oo[7]}} - {{j[7]}}</strong></p></label>
+    
+    <label>Literary Style: </label> <label><strong>{{k}}</strong></label>
+    <label>Source trusted? : </label>  <label><strong>{{pp}}</strong></label>
+    <label>Age of Article: </label> <label><strong>{{ll}}</strong></label>
+    </div>
+  {% endif %}
+  <!--<div class="subt-cont" id="yo">
+    <label id="urt">URL</label>
+    <label id="dtt">Date</label>
+    <label id="hlt"></label>
+    <label id="bdt"></label>
+    <label id="srt"></label>
+    <label id="dt2t"></label>
+  </div>
+-->
+
+  <p id="ni"></p>
+<script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

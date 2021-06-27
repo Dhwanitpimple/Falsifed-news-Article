@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Falsified News Article Detection</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700,800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <h1>Falsified News Article Detection</h1>
+    {% if e %} 
+    <div class="res" style="text-align: center;">
+      <label><strong style="font-size: 40px;">Result</strong></label>
+      <label>Related Headlines & stances: <p style="text-align: justify;">{{l[0]}}</p><p style="text-align: justify;">{{l[1]}}</p><p style="text-align: justify;">{{l[2]}}</p></label>
+      <label>Literary Style: </label>
+      <label>Source trusted? : </label>
+      <label>Age of Article: </label>
+      </div>
+    {% endif %}  
+</body>
+</html>
